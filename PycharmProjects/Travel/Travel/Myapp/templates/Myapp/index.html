@@ -1,0 +1,87 @@
+<!-- myapp/templates/myapp/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>选择出行短信模板</title>
+    <style>
+        .time-options {
+            display: none;
+            margin-top: 10px;
+        }
+        .time-options label {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>选择出行短信模板</h1>
+
+    <!-- 飞机按钮 -->
+    <button id="plane-btn">飞机</button>
+
+    <!-- 火车按钮 -->
+    <button id="train-btn">火车</button>
+
+    <!-- 飞机的时间选项 -->
+    <div id="plane-options" class="time-options">
+        <label><input type="radio" name="plane-time" value="1-day"> 一天内</label>
+        <label><input type="radio" name="plane-time" value="3-day"> 三天内</label>
+    </div>
+
+    <!-- 火车的时间选项 -->
+    <div id="train-options" class="time-options">
+        <label><input type="radio" name="train-time" value="1-day"> 一天内</label>
+        <label><input type="radio" name="train-time" value="3-day"> 三天内</label>
+    </div>
+
+    <script>
+        // 获取按钮和时间选项的 DOM 元素
+        const planeBtn = document.getElementById('plane-btn');
+        const trainBtn = document.getElementById('train-btn');
+        const planeOptions = document.getElementById('plane-options');
+        const trainOptions = document.getElementById('train-options');
+
+        // 点击“飞机”按钮时，显示飞机的时间选项
+        planeBtn.addEventListener('click', function() {
+            planeOptions.style.display = (planeOptions.style.display === 'none' || planeOptions.style.display === '') ? 'block' : 'none';
+            trainOptions.style.display = 'none';  // 隐藏火车的时间选项
+        });
+
+        // 点击“火车”按钮时，显示火车的时间选项
+        trainBtn.addEventListener('click', function() {
+            trainOptions.style.display = (trainOptions.style.display === 'none' || trainOptions.style.display === '') ? 'block' : 'none';
+            planeOptions.style.display = 'none';  // 隐藏飞机的时间选项
+        });
+        // 监听单选按钮的点击事件
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('click', function() {
+                // 获取选中的单选按钮的值
+                const selectedValue = this.value;
+                // 根据选中的值返回相应的字符串
+                if (selectedValue === '1-day') {
+                    // 获取当前日期+1
+                    const currentDate = new Date();
+                    const nextDay = new Date(currentDate);
+                    nextDay.setDate(currentDate.getDate() + 1);
+                    const formattedDate = nextDay.toISOString().split('T')[0];
+                    // 创建一个临时的 textarea 元素用于复制
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = `你好 胡京旺 ，您已成功购票，${formattedDate} 发车，车次 S110`;
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempTextArea);
+                    alert('复制成功');
+                } else if (selectedValue === '3-day') {
+                    alert('B'); // 这里可以替换为实际的返回逻辑
+                }
+            });
+        });
+    </script>
+</body>
+</html>

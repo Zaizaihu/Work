@@ -1,0 +1,28 @@
+Travel/
+│
+├── Travel/                # 项目的主目录
+│   ├── __init__.py
+│   ├── settings.py           # 配置文件
+│   ├── urls.py               # URL 路由文件
+│   ├── asgi.py               # ASGI 配置
+│   └── wsgi.py               # WSGI 配置
+│
+├── myapp/                     # Django 应用目录
+│   ├── __init__.py
+│   ├── admin.py              # 后台管理
+│   ├── apps.py               # 应用配置
+│   ├── models.py             # 数据模型
+│   ├── views.py              # 视图函数
+│   ├── tests.py              # 测试代码
+│   ├── migrations/           # 数据库迁移
+│   └── templates/            # 模板文件
+│       └── myapp/
+│           └── index.html
+│   └── static/               # 静态文件
+│       └── myapp/
+│           └── style.css
+│   └── urls.py               # 应用的 URL 路由配置
+│
+├── db.sqlite3                # SQLite 数据库文件
+├── manage.py                 # 项目管理命令
+└── requirements.txt          # 依赖包
